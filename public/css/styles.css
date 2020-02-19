@@ -40,7 +40,8 @@ input {
 button {
     cursor: pointer;
     padding: 12px;
-    background: #7C5CBF;
+    border-radius: 1rem;
+    background: #333;
     border: none;
     color: white;
     font-size: 16px;
@@ -61,7 +62,7 @@ button:disabled {
 .centered-form {
     background: #333744;
     width: 100vw;
-    height: 100vh;   
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,7 +93,7 @@ button:disabled {
 .chat__sidebar {
     height: 100vh;
     color: white;
-    background: #333744;
+    background: #1D1F26;
     width: 225px;
     overflow-y: scroll
 }
@@ -115,7 +116,7 @@ button:disabled {
 /* Message Styles */
 
 .message {
-    margin-bottom: 16px;   
+    margin-bottom: 16px;
 }
 
 .message__name {
@@ -166,7 +167,7 @@ button:disabled {
     font-weight: 400;
     font-size: 22px;
     background: #2c2f3a;
-    padding: 24px;   
+    padding: 24px;
 }
 
 .list-title {
