@@ -1,18 +1,24 @@
-const generateMessage = (text) => {
-    return {
-        text,
-        createdAt: new Date().getTime()
-    }
-}
+/**
+ *
+ * @param {string} text
 
-const generateLocationMessage = (url) => {
-    return {
-        url,
-        createdAt: new Date().getTime()
-    }
-}
+ */
+const generateMessage = text => ({
+  text,
+
+  createdAt: new Date().getTime(),
+});
+
+/**
+ *
+ * @param {string} url
+ */
+const generateLocationMessage = url => ({
+  url,
+  createdAt: new Date().getTime(),
+});
 
 module.exports = {
-    generateMessage,
-    generateLocationMessage
-}
+  generateMessage,
+  generateLocationMessage,
+};

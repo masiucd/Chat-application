@@ -11,6 +11,7 @@ const {
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
+const { randomWord, greetings } = require('./utils/helpers');
 
 const port = process.env.PORT || 5000;
 const publicDirectoryPath = path.join(__dirname, '../public');
@@ -20,8 +21,23 @@ app.use(express.static(publicDirectoryPath));
 io.on('connection', socket => {
   console.log('New WebSocket connection');
 
-  socket.emit('message', generateMessage('Welcome!'));
-  socket.broadcast.emit('message', generateMessage('A new user has joined!'));
+  socket.on('join', ({ username, room }) => {
+    console.log(username, room);
+    // join given chat room and pass the name of the room to join
+
+    // io.to.emit = on specific room for given users
+    // socket.broadcast.to.emit = on all except for this current user
+
+    socket.emit('message', generateMessage(randomWord(greetings)));
+    socket.broadcast
+      .to(room)
+      .emit(
+        'message',
+        generateMessage(`username: ${username} has joined the chat!`)
+      );
+
+    socket.join(room);
+  });
 
   socket.on('sendMessage', (message, callback) => {
     const filter = new Filter();
