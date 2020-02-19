@@ -46,7 +46,8 @@ io.on('connection', socket => {
       return callback('Profanity is not allowed!');
     }
 
-    io.emit('message', generateMessage(message));
+    // TODO: Change it to dynamic
+    io.to('123').emit('message', generateMessage(message));
     callback();
   });
 
