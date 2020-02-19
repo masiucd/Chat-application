@@ -37,20 +37,23 @@ form input {
 button {
   cursor: pointer;
   padding: 12px;
-  background: #b8479c;
+  background: #4758b8;
   border: none;
   color: #fff;
-  font-size: 16px;
-  transition: background .3s ease
+  font-size: 18px;
+  font-weight: 700;
+  transition: background .3s ease-in-out;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 button:hover {
-  background: #b8479c
+  background: #4758b8
 }
 
 button:disabled {
   cursor: default;
-  background: #b8479c
+  background: #4758b8
 }
 
 #join-title {

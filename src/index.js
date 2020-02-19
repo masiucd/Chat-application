@@ -4,6 +4,12 @@ const express = require('express');
 const socketio = require('socket.io');
 const Filter = require('bad-words');
 const {
+  getUser,
+  getUsersInRoom,
+  removeUser,
+  addUser,
+} = require('./utils/users');
+const {
   generateMessage,
   generateLocationMessage,
 } = require('./utils/messages');
@@ -21,22 +27,24 @@ app.use(express.static(publicDirectoryPath));
 io.on('connection', socket => {
   console.log('New WebSocket connection');
 
-  socket.on('join', ({ username, room }) => {
-    console.log(username, room);
-    // join given chat room and pass the name of the room to join
+  socket.on('join', ({ username, room }, cb) => {
+    const { error, user } = addUser({ id: socket.id, username, room });
 
-    // io.to.emit = on specific room for given users
-    // socket.broadcast.to.emit = on all except for this current user
+    if (error) {
+      return cb(error);
+    }
+
+    socket.join(user.room);
 
     socket.emit('message', generateMessage(randomWord(greetings)));
     socket.broadcast
-      .to(room)
+      .to(user.room)
       .emit(
         'message',
-        generateMessage(`username: ${username} has joined the chat!`)
+        generateMessage(`username: ${user.username} has joined the chat!`)
       );
-
-    socket.join(room);
+    // send back callback without an error, everyting went well
+    cb();
   });
 
   socket.on('sendMessage', (message, callback) => {
@@ -62,7 +70,14 @@ io.on('connection', socket => {
   });
 
   socket.on('disconnect', () => {
-    io.emit('message', generateMessage('A user has left!'));
+    const user = removeUser(socket.id);
+
+    if (user) {
+      io.to(user.room).emit(
+        'message',
+        generateMessage(`${user.username} has left the chat!`)
+      );
+    }
   });
 });
 
