@@ -1,84 +1,55 @@
 /* eslint-disable no-shadow */
-/**
- *
- * @param {boolean} success
- * @param {string} error
- * @param {number} statusCode
- */
-const handleError = (success = false, error = 'error', statusCode = 404) => ({
-  success,
-  error,
-  statusCode,
-});
-
+/* eslint-disable no-param-reassign */
 const users = [];
 
-/**
- *
- * @param {string} str
- */
-const prettifyString = str => str.trim().toLowerCase();
+const addUser = ({ id, username, room }) => {
+  // Clean the data
+  username = username.trim().toLowerCase();
+  room = room.trim().toLowerCase();
 
-/**
- *
- * @param {Object} userObject
- */
-const addUser = userObject => {
-  let { id, username, room } = userObject;
-  username = prettifyString(username);
-  room = prettifyString(room);
-
+  // Validate the data
   if (!username || !room) {
-    return handleError(false, 'Username and room is required', 400);
+    return {
+      error: 'Username and room are required!',
+    };
   }
 
-  // find the right user
-  const isUser = users.find(
-    user => user.username === username && user.room === room
+  // Check for existing user
+  const existingUser = users.find(
+    user => user.room === room && user.username === username
   );
 
-  if (isUser) {
-    return handleError(false, 'Username is in use', 400);
+  // Validate username
+  if (existingUser) {
+    return {
+      error: 'Username is in use!',
+    };
   }
 
+  // Store user
   const user = { id, username, room };
   users.push(user);
   return { user };
 };
 
-/**
- *
- * @param {string} userID
- */
-const removeUser = userID => {
-  const findUserIndx = users.findIndex(user => user.id === userID);
-  if (findUserIndx !== -1) {
-    return users.splice(findUserIndx, 1)[0];
+const removeUser = id => {
+  const index = users.findIndex(user => user.id === id);
+
+  if (index !== -1) {
+    return users.splice(index, 1)[0];
   }
 };
 
-/**
- *
- * @param {string} userId
- */
-const getUser = userId => {
-  const findUser = users.find(user => user.id === userId);
-  if (!findUser) {
-    return handleError(false, `no user found with id of ${userId}`, 400);
-  }
-  return findUser;
+const getUser = id => users.find(user => user.id === id);
+
+const getUsersInRoom = room => {
+  room = room.trim().toLowerCase();
+  return users.filter(user => user.room === room);
 };
 
-/**
- *
- * @param {string} roomName
- */
-const getUsersInRoom = roomName => {
-  const isUsers = users.filter(user => user.room === roomName);
-  if (isUsers.length === 0) {
-    return handleError(false, `No users found in room ${roomName}`, 400);
-  }
-  return isUsers;
+module.exports = {
+  addUser,
+  removeUser,
+  getUser,
+  getUsersInRoom,
 };
-
-module.exports = { addUser, removeUser, getUser, getUsersInRoom };

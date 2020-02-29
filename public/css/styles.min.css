@@ -8,7 +8,9 @@ html {
   font-size: 16px
 }
 
-
+input {
+  font-size: 14px
+}
 
 body {
   line-height: 1.4;
@@ -27,39 +29,32 @@ label {
   color: #777
 }
 
-form input {
-  border: 2px solid rgb(58, 57, 57);
+input {
+  border: 1px solid #eee;
   padding: 12px;
-  outline: none;
-  border-radius: .4rem;
+  outline: none
 }
 
 button {
   cursor: pointer;
   padding: 12px;
-  background: #4758b8;
-  border: none;
+  background: rgb(20, 174, 235, 0.8);
+  border-radius: .4rem;
+  border: 2px solid #1D1F26;
   color: #fff;
   font-size: 18px;
-  font-weight: 700;
+  letter-spacing: .1rem;
   transition: background .3s ease-in-out;
-  letter-spacing: 1px;
-  text-transform: uppercase;
 }
 
 button:hover {
-  background: #4758b8
+  background: rgba(10, 36, 46, 0.8);
 }
 
 button:disabled {
   cursor: default;
-  background: #4758b8
-}
-
-#join-title {
-  text-align: center;
-  letter-spacing: 1px;
-  border-bottom: 2px solid #333;
+  background: rgba(235, 235, 235, 0.8);
+  color: #1D1F26;
 }
 
 .centered-form {
@@ -76,7 +71,8 @@ button:disabled {
   background: #F7F7FA;
   padding: 24px;
   width: 250px;
-  border-radius: .5rem;
+  border-radius: 1rem;
+
 }
 
 .centered-form button {
@@ -175,21 +171,4 @@ button:disabled {
   list-style-type: none;
   font-weight: 300;
   padding: 12px 24px 0
-}
-
-button {
-  border-radius: .5rem;
-  background: rgba(28, 125, 170, 0.853);
-  /* border: 2px solid #333; */
-  box-shadow: 1px 2px 1px 2px #ccc;
-}
-
-input {
-  border: 2px solid #1D1F26;
-  box-shadow: 1px 2px 1px 2px #ccc;
-
-}
-
-button:hover {
-  box-shadow: 2px 2px 2px 2px #ccc;
 }

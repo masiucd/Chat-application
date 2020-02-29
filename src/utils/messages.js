@@ -1,19 +1,11 @@
-/**
- *
- * @param {string} text
-
- */
-const generateMessage = text => ({
+const generateMessage = (username, text) => ({
+  username,
   text,
-
   createdAt: new Date().getTime(),
 });
 
-/**
- *
- * @param {string} url
- */
-const generateLocationMessage = url => ({
+const generateLocationMessage = (username, url) => ({
+  username,
   url,
   createdAt: new Date().getTime(),
 });

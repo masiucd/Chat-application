@@ -40,8 +40,7 @@ input {
 button {
     cursor: pointer;
     padding: 12px;
-    border-radius: 1rem;
-    background: #333;
+    background: rgb(25, 124, 218);
     border: none;
     color: white;
     font-size: 16px;
@@ -49,18 +48,18 @@ button {
 }
 
 button:hover {
-    background: #6b47b8;
+    background: rgb(25, 124, 218);
 }
 
 button:disabled {
     cursor: default;
-    background: #7c5cbf94;
+    background: rgb(25, 124, 218);
 }
 
 /* Join Page Styles */
 
 .centered-form {
-    background: #333744;
+    background: #272930;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -93,7 +92,7 @@ button:disabled {
 .chat__sidebar {
     height: 100vh;
     color: white;
-    background: #1D1F26;
+    background: #272930;
     width: 225px;
     overflow-y: scroll
 }
